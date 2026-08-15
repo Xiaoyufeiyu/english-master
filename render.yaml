@@ -1,0 +1,25 @@
+# Render 部署配置（Infrastructure as Code）
+# 文档：https://render.com/docs/yaml-spec
+# 用法：Render 控制台 → New → Blueprint → 连接本仓库 → 自动按此文件创建服务
+services:
+  - type: web
+    name: english-master
+    runtime: node
+    plan: free            # 免费层；持久化存储需升级 Starter 套餐（见 README「持久化」）
+    region: oregon        # 离中国大陆较近可选 singapore；免费层 oregon 最稳
+    branch: main
+    rootDir: .
+    buildCommand: "echo render-no-build-needed"   # 零依赖，无需构建
+    startCommand: "node server/server.js"
+    healthCheckPath: "/"
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # 持久化存储（仅 Starter 及以上套餐生效）：把存档写到挂载的持久盘
+      # - key: EM_DATA
+      #   value: "/var/data/data.json"
+    # 持久盘（仅 Starter 及以上套餐支持；免费层会忽略此段，数据随重启清空）
+    # disk:
+    #   name: em-data-disk
+    #   mountPath: /var/data
+    #   sizeGB: 1

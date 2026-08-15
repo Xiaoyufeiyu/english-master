@@ -1,0 +1,23 @@
+# 依赖
+node_modules/
+
+# 运行时数据（用户存档 / 排行榜，由服务器动态生成，不入库）
+data.json
+server/data.json
+
+# 日志
+*.log
+server/server.log
+_tunnel.log
+
+# 临时测试脚本
+_test_*.js
+
+# 项目本地配置（不提交）
+.workbuddy/
+
+# 系统文件
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store

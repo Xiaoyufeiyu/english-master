@@ -1,0 +1,385 @@
+/* ============================================================
+ *  English Master — 修仙氛围 · 墨色深空主题
+ * ============================================================ */
+:root {
+  --bg: #0e0f17;
+  --bg2: #13151f;
+  --card: #1a1d2b;
+  --card2: #212536;
+  --ink: #e9e6dc;
+  --muted: #9aa0b8;
+  --line: #2c3146;
+  --brand: #6fe3c0;       /* 玉色 */
+  --brand-soft: rgba(111, 227, 192, 0.10);
+  --accent: #e8c46a;      /* 鎏金 */
+  --gold: #e8c46a;
+  --good: #5fd08a;
+  --bad: #ef6b6b;
+  --shadow: 0 8px 26px rgba(0, 0, 0, 0.45);
+  --serif: "STKaiti", "Kaiti SC", "KaiTi", "Songti SC", "SimSun", "Noto Serif SC", serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(111, 227, 192, 0.06), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(232, 196, 106, 0.05), transparent 55%),
+    var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  min-height: 100vh;
+}
+#app { max-width: 920px; margin: 0 auto; padding: 16px; }
+
+/* 顶栏 */
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(120deg, #15171f, #1d2a2a 60%, #1a2333);
+  color: var(--ink); border: 1px solid var(--line); border-radius: 18px;
+  padding: 16px 20px; box-shadow: var(--shadow);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.logo { font-size: 34px; filter: drop-shadow(0 0 6px rgba(111, 227, 192, 0.5)); }
+.brand-name { font-size: 21px; font-weight: 800; font-family: var(--serif); letter-spacing: 1px; color: #f3efe2; }
+.brand-sub { font-size: 12px; opacity: 0.8; color: var(--brand); }
+.hero-stats { display: flex; gap: 18px; }
+.stat { text-align: center; }
+.stat-label { display: block; font-size: 11px; opacity: 0.8; color: var(--muted); }
+.stat-val { font-size: 18px; font-weight: 800; color: var(--accent); }
+.stat-val .lv { font-size: 11px; font-weight: 600; opacity: 0.7; margin-left: 2px; color: var(--brand); }
+/* 真实修为进度条：state.xp / 该级所需，驱动突破 */
+.xpbar { margin-top: 5px; height: 6px; border-radius: 999px; background: rgba(255,255,255,0.14); overflow: hidden; }
+.xpbar > i { display: block; height: 100%; background: linear-gradient(90deg, #6fe3c0, #ffd479); border-radius: 999px; transition: width .35s ease; }
+
+/* 标签页 */
+.tabs { display: flex; gap: 6px; margin: 16px 0; flex-wrap: wrap; }
+.tab {
+  border: 1px solid var(--line); background: var(--card); color: var(--muted);
+  padding: 9px 14px; border-radius: 12px; cursor: pointer; font-size: 14px; font-weight: 600;
+  transition: all .15s;
+}
+.tab:hover { border-color: var(--brand); color: var(--brand); }
+.tab.active { background: linear-gradient(120deg, #2a6f5e, #1f8f76); color: #f3fff9; border-color: var(--brand); box-shadow: 0 0 12px rgba(111, 227, 192, 0.35); }
+
+/* 视图容器 */
+#view { min-height: 320px; }
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px;
+  box-shadow: var(--shadow); margin-bottom: 14px;
+}
+.card:hover { border-color: rgba(111, 227, 192, 0.4); }
+.grid { display: grid; gap: 12px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 640px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+
+h2 { margin: 0 0 10px; font-size: 18px; font-family: var(--serif); letter-spacing: .5px; color: #f3efe2; }
+h3 { margin: 0 0 8px; font-size: 15px; color: #e9e6dc; }
+.muted { color: var(--muted); font-size: 13px; }
+.en { font-weight: 700; color: var(--brand); }
+.ipa { color: var(--muted); font-size: 13px; }
+.ex { font-size: 13px; color: #c9cdda; }
+
+/* 按钮 */
+.btn {
+  border: none; border-radius: 12px; padding: 10px 16px; font-size: 14px; font-weight: 700;
+  cursor: pointer; background: linear-gradient(120deg, #2a6f5e, #1f8f76); color: #f3fff9;
+  transition: transform .1s, opacity .15s; box-shadow: 0 0 10px rgba(111, 227, 192, 0.18);
+}
+.btn:hover { opacity: .92; }
+.btn:active { transform: scale(.97); }
+.btn.ghost { background: transparent; color: var(--brand); border: 1px solid rgba(111, 227, 192, 0.5); box-shadow: none; }
+.btn.accent { background: linear-gradient(120deg, #b8902f, #e8c46a); color: #2a1f06; box-shadow: 0 0 10px rgba(232, 196, 106, 0.3); }
+.btn.full { width: 100%; }
+.btn.sm { padding: 7px 12px; font-size: 13px; }
+
+/* 进度条 */
+.bar { height: 10px; background: var(--card2); border-radius: 99px; overflow: hidden; }
+.bar > i { display: block; height: 100%; background: linear-gradient(90deg, #6fe3c0, #e8c46a); border-radius: 99px; }
+
+/* 续修小标签 */
+.pill { display: inline-block; font-size: 11px; font-weight: 700; color: #0d1b2a; background: linear-gradient(90deg, #6fe3c0, #e8c46a); padding: 1px 8px; border-radius: 99px; margin-left: 6px; vertical-align: middle; }
+
+/* 单词卡 */
+.flash {
+  text-align: center; padding: 30px 16px; border-radius: 16px;
+  background: linear-gradient(135deg, rgba(111, 227, 192, 0.10), rgba(232, 196, 106, 0.06));
+  border: 1px solid var(--line);
+}
+.flash .word { font-size: 40px; font-weight: 800; color: var(--brand); }
+.flash .meta { margin-top: 8px; }
+.choice-row { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; justify-content: center; }
+
+/* 仙勋墙 */
+.badge-group { margin-top: 16px; }
+.badge-group-h {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--serif); font-size: 16px; font-weight: 700;
+  color: var(--accent); letter-spacing: 2px;
+  border-left: 3px solid var(--accent); padding-left: 10px; margin-bottom: 10px;
+}
+.badge-group-h .muted { font-family: var(--body, system-ui); font-size: 12px; letter-spacing: 0; color: var(--muted); }
+.badge {
+  text-align: center; padding: 14px 6px; border-radius: 14px;
+  background: linear-gradient(160deg, rgba(111, 227, 192, 0.14), rgba(232, 196, 106, 0.10));
+  border: 1px solid rgba(111, 227, 192, 0.35);
+  box-shadow: inset 0 0 16px rgba(111, 227, 192, 0.08);
+  transition: transform .15s ease;
+}
+.badge:hover { transform: translateY(-2px); }
+.badge.locked {
+  background: #13151f; border-color: var(--line);
+  filter: grayscale(1); opacity: .42;
+  box-shadow: none;
+}
+.badge .ico { font-size: 30px; line-height: 1.1; }
+.badge .bn { font-size: 12px; font-weight: 700; margin-top: 5px; color: var(--ink); }
+.badge.locked .bn { color: var(--muted); }
+.badge .bd { font-size: 11px; color: var(--muted); }
+
+/* 仙勋收集进度 */
+.badge-progress { margin-bottom: 4px; }
+.badge-progress-bar {
+  height: 10px; border-radius: 999px; overflow: hidden;
+  background: #13151f; border: 1px solid var(--line);
+}
+.badge-progress-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+}
+.badge-progress-txt { margin-top: 6px; font-size: 13px; color: var(--muted); }
+.badge-progress-txt b { color: var(--accent); font-size: 15px; }
+
+/* 剧情 */
+.scene {
+  background: linear-gradient(135deg, rgba(232, 196, 106, 0.08), rgba(111, 227, 192, 0.05));
+  border: 1px solid rgba(232, 196, 106, 0.3); border-radius: 16px; padding: 18px;
+}
+.choice {
+  display: block; width: 100%; text-align: left; margin: 8px 0; padding: 12px 14px;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--card2); color: var(--ink); cursor: pointer; font-size: 14px;
+}
+.choice:hover { border-color: var(--accent); }
+.choice.ok { border-color: var(--good); background: rgba(95, 208, 138, 0.12); }
+.choice.no { border-color: var(--bad); background: rgba(239, 107, 107, 0.12); }
+
+/* 陪练聊天 */
+.chat { height: 360px; overflow-y: auto; background: #15171f; border: 1px solid var(--line); border-radius: 14px; padding: 14px; }
+.msg { margin: 8px 0; }
+.msg.user { text-align: right; }
+.msg .bubble { display: inline-block; padding: 9px 13px; border-radius: 14px; max-width: 80%; font-size: 14px; }
+.msg.bot .bubble { background: var(--card2); border: 1px solid var(--line); color: var(--ink); }
+.msg.user .bubble { background: linear-gradient(120deg, #2a6f5e, #1f8f76); color: #f3fff9; }
+.fb { font-size: 12px; color: var(--accent); margin: 4px 0 0; }
+.input-row { display: flex; gap: 8px; margin-top: 10px; }
+.input-row input { flex: 1; padding: 11px 14px; border: 1px solid var(--line); border-radius: 12px; font-size: 14px; background: #15171f; color: var(--ink); }
+
+/* 打卡 */
+.streak-big { font-size: 44px; font-weight: 800; color: var(--accent); text-align: center; text-shadow: 0 0 16px rgba(232, 196, 106, 0.4); }
+
+/* Toast */
+.toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+  background: #1a1d2b; color: var(--ink); padding: 12px 18px; border-radius: 12px; font-size: 14px;
+  border: 1px solid var(--brand); opacity: 0; pointer-events: none; transition: all .25s; z-index: 99;
+  box-shadow: var(--shadow);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* 反馈条 */
+.notice { background: rgba(232, 196, 106, 0.10); border: 1px solid rgba(232, 196, 106, 0.35); color: #e8c46a; padding: 10px 14px; border-radius: 12px; font-size: 13px; margin-top: 10px; }
+.kbd { background: rgba(111, 227, 192, 0.12); border: 1px solid rgba(111, 227, 192, 0.4); border-radius: 6px; padding: 1px 6px; font-size: 12px; color: var(--brand); }
+
+/* 榜首横幅（修仙 · 鎏金祥瑞） */
+.champion {
+  background: linear-gradient(120deg, #e8c46a, #b8902f);
+  color: #2a1f06; border-radius: 16px; padding: 14px 18px; text-align: center;
+  font-weight: 800; font-size: 16px; box-shadow: 0 0 18px rgba(232, 196, 106, 0.4); margin-bottom: 14px;
+  font-family: var(--serif); letter-spacing: .5px;
+}
+.champion b { color: #5a3d00; }
+
+/* 末位横幅（灰青 · 沉静） */
+.loser {
+  background: linear-gradient(120deg, #2a3550, #3a4a6b);
+  color: #d6e0f0; border-radius: 16px; padding: 14px 18px; text-align: center;
+  font-weight: 800; font-size: 16px; box-shadow: var(--shadow); margin: 0 0 14px;
+  font-family: var(--serif); letter-spacing: .5px;
+}
+.loser b { color: #b9e6ff; }
+
+/* 角色栏 */
+.profilebar { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; flex-wrap: wrap; }
+.profilebar .who { font-size: 14px; color: var(--muted); }
+.profilebar b { color: var(--brand); }
+
+/* 弹窗 */
+.modal {
+  position: fixed; inset: 0; background: rgba(8, 9, 14, .6);
+  display: flex; align-items: center; justify-content: center; z-index: 200; padding: 16px;
+  backdrop-filter: blur(2px);
+}
+.modal.hidden { display: none; }
+.modal-box {
+  background: var(--card); border: 1px solid rgba(111, 227, 192, 0.4); border-radius: 18px;
+  padding: 22px; width: 100%; max-width: 460px; box-shadow: 0 20px 50px rgba(0, 0, 0, .5);
+}
+.char-list { margin: 12px 0; max-height: 46vh; overflow: auto; }
+.char-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; margin: 8px 0; }
+.char-row { color: var(--ink); }
+
+/* 排行榜 */
+.rank-row {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+  border: 1px solid var(--line); border-radius: 14px; margin: 8px 0; background: var(--card2);
+}
+.rank-row.me { border-color: var(--brand); background: rgba(111, 227, 192, 0.10); }
+.rank-no { font-size: 26px; width: 42px; text-align: center; }
+.rank-name { flex: 1; color: var(--ink); }
+.rank-xp { font-weight: 800; color: var(--accent); }
+.rank-act { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; min-width: 64px; }
+.like-btn { background: rgba(111, 227, 192, 0.12); color: var(--brand); }
+.like-btn.liked { background: #15171f; color: var(--muted); cursor: default; }
+
+/* 仙门来讯 · 信笺卡 */
+.greet-card { background: rgba(232, 196, 106, 0.08); border-color: rgba(232, 196, 106, 0.35); }
+.greet-list { display: flex; flex-direction: column; gap: 8px; margin-top: 6px; }
+.greet-item { background: var(--card2); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: 15px; line-height: 1.6; }
+
+/* 飞剑传书 · 卷轴弹窗 */
+.greet-modal-head {
+  text-align: center; font-family: var(--serif); font-size: 19px; font-weight: 800;
+  color: var(--accent); letter-spacing: 1px; margin-bottom: 12px;
+  text-shadow: 0 0 12px rgba(232, 196, 106, 0.35);
+}
+.greet-scrolls { max-height: 56vh; overflow: auto; display: flex; flex-direction: column; gap: 12px; }
+.greet-scroll {
+  background: linear-gradient(135deg, rgba(111, 227, 192, 0.07), rgba(232, 196, 106, 0.05));
+  border: 1px solid var(--line); border-left: 4px solid var(--accent);
+  border-radius: 12px; padding: 12px 14px;
+}
+.greet-scroll-title { font-family: var(--serif); font-size: 15px; font-weight: 800; color: var(--brand); margin-bottom: 6px; }
+.greet-scroll-body { font-size: 14px; line-height: 1.8; color: #d9d6cb; text-align: justify; }
+.greet-scroll-body b { color: var(--accent); }
+.greet-modal-actions { margin-top: 14px; }
+
+/* 每日推荐学习 */
+.daily-card { padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; margin: 10px 0; background: var(--card2); }
+.dc-head { display: flex; align-items: baseline; gap: 10px; }
+.dc-en { font-size: 22px; font-weight: 800; color: var(--brand); }
+.dc-ipa { color: var(--muted); font-style: italic; }
+.dc-zh { font-size: 16px; margin: 4px 0 8px; color: #e9e6dc; }
+.dc-ex { font-size: 15px; line-height: 1.7; color: #c9cdda; }
+.dc-tip { font-size: 13px; color: var(--accent); margin-top: 6px; background: rgba(232, 196, 106, 0.08); border-radius: 8px; padding: 6px 8px; }
+
+/* 例句中可点击查义的单词 */
+.wclick { color: var(--brand); cursor: pointer; border-bottom: 1px dashed rgba(111, 227, 192, 0.7); }
+.wclick:hover { background: rgba(111, 227, 192, 0.14); border-radius: 4px; }
+
+/* 今日修程 · 登仙之路 */
+.route { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+.route-step {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px;
+  background: var(--card2); position: relative;
+}
+.route-step::before {
+  content: ""; position: absolute; left: 28px; top: -12px;
+  height: 12px; width: 2px; background: var(--line);
+}
+.route-step:first-child::before { display: none; }
+.route-no {
+  flex: none; width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center; font-family: var(--serif); font-weight: 800;
+  font-size: 15px; color: #1a1208;
+  background: linear-gradient(135deg, var(--accent), #e9c46a);
+  box-shadow: 0 2px 8px rgba(232, 196, 106, 0.25);
+}
+.route-ico { flex: none; font-size: 26px; }
+.route-body { flex: 1; min-width: 0; }
+.route-title { font-family: var(--serif); font-size: 17px; font-weight: 800; color: var(--brand); }
+.route-desc { font-size: 13.5px; color: #c9cdda; margin: 3px 0 8px; line-height: 1.6; }
+.route-desc b { color: var(--accent); }
+
+/* 点词弹窗 */
+.wordpop {
+  position: fixed; z-index: 999; max-width: 240px;
+  background: #15171f; border: 1px solid var(--brand); border-radius: 12px;
+  padding: 10px 12px; box-shadow: var(--shadow); font-size: 14px; color: var(--ink);
+}
+.wordpop.hidden { display: none; }
+.wordpop b { font-size: 16px; color: var(--brand); }
+.wordpop .dc-ipa { color: var(--muted); font-style: italic; margin-left: 4px; }
+
+/* 灵石商店（仙市） */
+.shop-item { display: flex; flex-direction: column; gap: 6px; align-items: stretch; text-align: center; }
+.shop-ico { font-size: 34px; line-height: 1; }
+.shop-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.shop-name { font-family: var(--serif); font-size: 16px; font-weight: 800; color: var(--brand); }
+.shop-price { flex: none; font-weight: 800; color: #2b2118; background: linear-gradient(135deg, #ffd479, #e9b54a); border: 1px solid #c79433; border-radius: 999px; padding: 2px 10px; font-size: 13px; box-shadow: 0 1px 4px rgba(201,148,51,.35); white-space: nowrap; }
+.shop-desc { font-size: 13px; color: #c9cdda; line-height: 1.6; min-height: 38px; text-align: left; }
+.shop-owned { font-size: 12px; color: var(--accent); margin-top: -2px; }
+.shop-item .btn { margin-top: auto; }
+
+/* 突破丹药 · 首页/仙市 破境提示 */
+.break-banner {
+  margin-top: 12px;
+  background: linear-gradient(135deg, rgba(232,196,106,.14), rgba(111,227,192,.12));
+  border: 1px solid rgba(232,196,106,.45);
+  color: #f0d79a; padding: 12px 14px; border-radius: 12px; font-size: 14px; line-height: 1.7;
+}
+.break-banner.break-ready {
+  background: linear-gradient(135deg, rgba(232,196,106,.22), rgba(239,93,93,.16));
+  border-color: rgba(239,93,93,.55); color: #ffd9a0;
+  box-shadow: 0 0 16px rgba(232,196,106,.25);
+}
+.break-tag {
+  display: inline-block; font-size: 11px; font-weight: 800; color: #0d1b2a;
+  background: linear-gradient(135deg, #ffd479, #e9b54a); border-radius: 999px;
+  padding: 1px 8px; margin-left: 6px; vertical-align: middle;
+}
+.bag { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.bag-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--brand-soft); border: 1px solid var(--line);
+  color: var(--ink); border-radius: 999px; padding: 5px 12px; font-size: 13px;
+}
+
+/* ---------- 登录 / 注册遮罩 ---------- */
+.auth-view {
+  position: fixed; inset: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(8, 10, 20, 0.93); backdrop-filter: blur(4px); padding: 20px;
+}
+.auth-view.hidden { display: none; }
+.auth-card {
+  width: min(380px, 100%);
+  background: linear-gradient(160deg, #11151f, #0c0f17);
+  border: 1px solid var(--line); border-radius: 18px;
+  padding: 26px 22px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+.auth-logo { font-size: 22px; font-weight: 800; color: var(--brand); text-align: center; }
+.auth-sub { text-align: center; color: var(--muted); font-size: 13px; margin: 4px 0 16px; }
+.auth-tabs { display: flex; gap: 8px; margin-bottom: 14px; }
+.auth-tab {
+  flex: 1; padding: 10px; border: 1px solid var(--line); background: transparent;
+  color: var(--muted); border-radius: 12px; cursor: pointer; font-size: 15px;
+}
+.auth-tab.on { background: var(--brand-soft); color: var(--brand); border-color: var(--brand); }
+.auth-fields { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.auth-fields input {
+  width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px;
+  font-size: 15px; background: #0a0d15; color: #fff; box-sizing: border-box;
+}
+.auth-msg {
+  background: var(--brand-soft); color: var(--brand); border-radius: 10px;
+  padding: 10px 12px; font-size: 13px; margin-bottom: 12px; line-height: 1.6;
+}
+.auth-msg a, .auth-link { color: #ffd479; text-decoration: underline; }
+.auth-demo {
+  margin-top: 14px; font-size: 12px; color: var(--muted);
+  background: #0a0d15; border: 1px dashed var(--line); border-radius: 10px;
+  padding: 10px 12px; line-height: 1.8;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>English Master · 修仙英语养成</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- 榜首横幅：网页最上面，显示今日修炼最夯之人 -->
+    <div id="champion-banner" class="champion">正在加载榜单…</div>
+    <!-- 末位横幅：紧跟榜首下方，显示今日修炼最拉之人 -->
+    <div id="loser-banner" class="loser"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">🪷</span>
+        <div>
+          <div class="brand-name">English Master</div>
+          <div class="brand-sub">以古仙语通大道 · 从零开始的修仙英语养成</div>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-label">段位</span>
+          <span class="stat-val" id="hdr-level">炼气期1层</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">今日修为</span>
+          <span class="stat-val" id="hdr-xp">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">连续闭关</span>
+          <span class="stat-val" id="hdr-streak">0 🔥</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">灵石</span>
+          <span class="stat-val" id="hdr-stones">0 💎</span>
+        </div>
+      </div>
+    </header>
+
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-view="home">🏠 洞府</button>
+      <button class="tab" data-view="words">📚 词藏</button>
+      <button class="tab" data-view="grammar">📐 心法</button>
+      <button class="tab" data-view="story">🎭 历练</button>
+      <button class="tab" data-view="tutor">💬 论道</button>
+      <button class="tab" data-view="daily">📜 仙谕</button>
+      <button class="tab" data-view="checkin">✅ 签到</button>
+      <button class="tab" data-view="shop">🪙 仙市</button>
+      <button class="tab" data-view="rank">🏆 修榜</button>
+    </nav>
+
+    <!-- 账号栏：当前登录修士 + 退出 -->
+    <div class="profilebar">
+      <span class="who">🧑‍🎓 修士：<b id="cur-name">—</b></span>
+      <button class="btn sm ghost" data-action="logout">🚪 退出</button>
+    </div>
+
+    <main id="view"></main>
+
+    <div id="toast" class="toast"></div>
+    <div id="wordpop" class="wordpop hidden"></div>
+  </div>
+
+  <!-- 登录 / 注册遮罩 -->
+  <div id="auth-view" class="auth-view hidden"></div>
+
+  <!-- 弹窗：创建角色 / 切换角色 / 改名 -->
+  <div id="modal" class="modal hidden"><div class="modal-box" id="modal-box"></div></div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/bulkwords.js"></script>
+  <script src="assets/engine.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
