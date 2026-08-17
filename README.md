@@ -60,29 +60,28 @@ node server/server.js          # 默认端口 8080；自定义：PORT=8080 node 
 
 也可在登录页自行注册新账号（注册后开发模式直接给出验证链接；正式部署接 SMTP 后改发邮件）。
 
-### 部署到公网（Hugging Face Spaces，推荐 · 免绑卡 · 支持 qq 邮箱）
-> 为什么选它：Render 要绑卡、Glitch 已停运、Koyeb 转付费、Replit 拒中国邮箱。
-> Hugging Face Spaces（简称 HF）是目前唯一同时满足「免费 + 不绑卡 + 能跑 Node 后端 + 国内打得开」的平台，用 Docker 跑你的后端，端口固定 7860。
+### 部署到公网（Alwaysdata，当前推荐 · 免绑卡 · 支持 qq 邮箱）
+> 为什么选它：Render 要绑卡、Glitch 已停运、Koyeb 转付费、Replit 拒中国邮箱、Hugging Face Docker 也收费。
+> Alwaysdata 是法国老牌免费主机，永久免费层 1GB 存储 / 256MB 内存，支持 Node.js，无需信用卡，qq 邮箱可注册。
 
-1. 打开 https://huggingface.co/join ，用 **qq 邮箱**注册（HF 不限制中国邮箱，直接能收到验证邮件）。
-2. 登录后点右上角头像 → **New Space**。
-3. 填写：
-   - **Space name**：`english-master`
-   - **License**：`mit`
-   - **Select the Space SDK**：选 **Docker** → **Blank**
-   - **Space hardware**：保持 **Free**
-   - **Visibility**：选 **Public**
-4. 点 **Create Space**，等待进入 Space 页面（先别管里面的默认内容）。
-5. 进入后点顶部 **Settings** → 找到 **Repository** 区 → **Link to a Git repository** → 选 **GitHub** 并授权 → 选本仓库 `Xiaoyufeiyu/english-master` → 保存。
-   - 仓库里已含 `Dockerfile`，HF 会自动拉取并按 7860 端口构建，无需你手动传文件。
-6. 回到 Space 主页，点 **Logs** 标签，等待出现 `English Master 账号版服务已启动`（约 1–3 分钟）。
-7. 页面右上角 **Embed this Space → Direct URL** 就是你的线上网址，形如 `https://你的HF用户名-english-master.hf.space`。
+1. 打开 https://www.alwaysdata.com/en/ ，点 **Sign up**，用 **qq 邮箱**注册并验证。
+2. 登录后进入管理后台，左侧记住你的**账户名**（如 `yourname`），你的网站地址将是 `https://yourname.alwaysdata.net`。
+3. 上传代码：
+   - 左侧 **Files**（文件）→ 进入 `/home/yourname/`
+   - 上传本机 `D:\english-master.zip`
+   - 解压到 `/home/yourname/english-master/`（网页文件管理器一般支持上传后右键/按钮解压）。
+4. 配置站点：
+   - 左侧 **Web** → **Sites**
+   - 编辑默认站点（或点 **Add a site**）：
+     - **Type**：选 **Node.js**
+     - **Node.js version**：`20`
+     - **Command**：`npm start`
+     - **Working directory**：`/home/yourname/english-master`
+     - **Addresses**：`yourname.alwaysdata.net`
+   - 点 **Submit**，再点 **Restart** 重启站点。
+5. 等 10–30 秒，打开 `https://yourname.alwaysdata.net` 即可注册登录。
 
-打开网址即可注册、登录、多人实时修榜。
-
-### 持久化（HF 可选）
-- 免费层文件系统默认持久，但长时间无人访问会被休眠（重新打开自动唤醒，首次约等 10–30 秒）。
-- 重启后 `data.json` 可能清空，只剩预置演示账号——适合演示。要长期保留用户存档，可在 Space **Settings → Variables and Secrets** 设 `EM_DATA=/data/data.json` 并开启 Persistent Storage。
+演示账号会自动生成（韩立/王婵），用户注册数据默认保存在项目目录的 `data.json`，免费层持久。
 
 ---
 
@@ -97,6 +96,13 @@ node server/server.js          # 默认端口 8080；自定义：PORT=8080 node 
 - **免费层**：文件系统是临时性的，服务重启/重新部署后 `data.json`（用户存档）会清空，只剩预置演示账号——适合短期演示。
 - **持久化**：升级 Render **Starter 套餐（$7/月）**，在 `render.yaml` 中取消 `disk` 段注释并设 `EM_DATA=/var/data/data.json`，存档写到持久盘，重启不丢。
 - 更大规模：可后续把存储换成数据库（Postgres/SQLite），代码已预留 `EM_DATA` 接入点，改造量小。
+
+### 已验证不可行的平台（截至 2026-08）
+- **Render**：免费版强制绑卡。
+- **Glitch**：已停运新项目。
+- **Koyeb**：被 Mistral 收购后新用户需付费。
+- **Replit**：拒绝 qq/163 等中国邮箱注册/登录。
+- **Hugging Face Spaces**：免费只剩 Static（静态网页），Docker 也收费。
 
 ### 后端 API 一览（`server/server.js`，零依赖 Node）
 - `POST /api/auth/register` → 注册（邮箱+密码，密码 scrypt 哈希存储）
