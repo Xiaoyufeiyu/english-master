@@ -11,7 +11,8 @@ const crypto = require("crypto");
 
 const ROOT = path.join(__dirname, "..");
 const DATA = process.env.EM_DATA || path.join(__dirname, "data.json");
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.ALWAYSDATA_HTTPD_PORT || process.env.PORT || 8080;
+const HOST = process.env.ALWAYSDATA_HTTPD_IP || "0.0.0.0";
 
 function todayStr() {
   const d = new Date();
@@ -384,7 +385,7 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(PORT, "0.0.0.0", () => {
+server.listen(PORT, HOST, () => {
   console.log("English Master 账号版服务已启动：http://localhost:" + PORT);
   console.log("支持 注册/登录/邮箱验证 + SSE 实时修榜 + 全量云端存档。");
 });
