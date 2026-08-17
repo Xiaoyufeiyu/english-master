@@ -60,7 +60,33 @@ node server/server.js          # 默认端口 8080；自定义：PORT=8080 node 
 
 也可在登录页自行注册新账号（注册后开发模式直接给出验证链接；正式部署接 SMTP 后改发邮件）。
 
-### 部署到公网（Render，推荐）
+### 部署到公网（Hugging Face Spaces，推荐 · 免绑卡 · 支持 qq 邮箱）
+> 为什么选它：Render 要绑卡、Glitch 已停运、Koyeb 转付费、Replit 拒中国邮箱。
+> Hugging Face Spaces（简称 HF）是目前唯一同时满足「免费 + 不绑卡 + 能跑 Node 后端 + 国内打得开」的平台，用 Docker 跑你的后端，端口固定 7860。
+
+1. 打开 https://huggingface.co/join ，用 **qq 邮箱**注册（HF 不限制中国邮箱，直接能收到验证邮件）。
+2. 登录后点右上角头像 → **New Space**。
+3. 填写：
+   - **Space name**：`english-master`
+   - **License**：`mit`
+   - **Select the Space SDK**：选 **Docker** → **Blank**
+   - **Space hardware**：保持 **Free**
+   - **Visibility**：选 **Public**
+4. 点 **Create Space**，等待进入 Space 页面（先别管里面的默认内容）。
+5. 进入后点顶部 **Settings** → 找到 **Repository** 区 → **Link to a Git repository** → 选 **GitHub** 并授权 → 选本仓库 `Xiaoyufeiyu/english-master` → 保存。
+   - 仓库里已含 `Dockerfile`，HF 会自动拉取并按 7860 端口构建，无需你手动传文件。
+6. 回到 Space 主页，点 **Logs** 标签，等待出现 `English Master 账号版服务已启动`（约 1–3 分钟）。
+7. 页面右上角 **Embed this Space → Direct URL** 就是你的线上网址，形如 `https://你的HF用户名-english-master.hf.space`。
+
+打开网址即可注册、登录、多人实时修榜。
+
+### 持久化（HF 可选）
+- 免费层文件系统默认持久，但长时间无人访问会被休眠（重新打开自动唤醒，首次约等 10–30 秒）。
+- 重启后 `data.json` 可能清空，只剩预置演示账号——适合演示。要长期保留用户存档，可在 Space **Settings → Variables and Secrets** 设 `EM_DATA=/data/data.json` 并开启 Persistent Storage。
+
+---
+
+### 部署到公网（Render，备选 · 需绑卡）
 1. 把本仓库推到 GitHub（已附 `render.yaml`）。
 2. Render 控制台 → **New → Blueprint**（或 Manual → Web Service）→ 连接该仓库。
 3. 按 `render.yaml` 自动建服务：Runtime `node`、Start `node server/server.js`、Health Check `/`、环境变量 `NODE_VERSION=22`。
